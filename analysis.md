@@ -314,7 +314,7 @@ Bela platform does not have `i2ctransfer` so we are going to simulate same scena
 
 
 <details>
-<summary>Basic test if official Bela `I2c.h` - works</summary>
+<summary>Basic test with official Bela `I2c.h` - works</summary>
 
 Same sequence, same result
 
