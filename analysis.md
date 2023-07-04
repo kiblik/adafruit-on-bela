@@ -275,10 +275,21 @@ Error: Can't use SMBus Quick Write command on this bus
 
 </details>
 
+
+<details>
+<summary>Test basic functionality (i2ctransfer) - does not work (command not found)</summary>
+
+```shell
+# i2ctransfer
+-bash: i2ctransfer: command not found
+```
+
+</details>
+
 <details>
 <summary>Test basic functionality (i2cget, i2cset) - works</summary>
 
-Bela platform does not have `i2ctransfer` so we are going to simulate same scenario with `i2cget` and  `i2cset`
+Bela platform does not have `i2ctransfer` so we are going to simulate same scenario with `i2cget` and `i2cset`
 
 - Controler: `0x80` => `MLX90393_REG_EX` (enter ExitMode)
 - Sensor: `0x02` => `0x02 >> 2 == MLX90393_STATUS_OK`
