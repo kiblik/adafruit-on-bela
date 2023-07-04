@@ -2,8 +2,8 @@ This document is trying to summarise steps performed to create working implement
 
 # Facts
 
-**Used sensor:** MLX90393
-**Address of sensor:** 0x0c
+- **Used sensor:** MLX90393
+- **Address of sensor:** 0x0c
 
 # Pre-checks
 
