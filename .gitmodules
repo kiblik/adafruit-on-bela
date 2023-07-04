@@ -5,5 +5,5 @@
 	path = Adafruit_BusIO
 	url = git@github.com:kiblik/Adafruit_BusIO.git
 [submodule "Adafruit_Sensor"]
-	path = Adafruit_Sensor
+	path = Adafruit_Unified_Sensor
 	url = git@github.com:kiblik/Adafruit_Sensor.git
