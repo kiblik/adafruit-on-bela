@@ -130,7 +130,7 @@ $ i2cdetect -y -q 1
 </details>
 
 <details>
-<summary>Test "receive byte" detection - does not work</summary>
+<summary>Test "receive byte" detection - does not work (sensor not detected)</summary>
 
 ```shell
 $ i2cdetect -y -r 1
@@ -196,6 +196,82 @@ $ i2cget -y 1 0x0c
 <summary>Setup</summary>
 
 ![Bela connected to MLX90393 via I2C](./pics/bela.jpg)
+
+</details>
+
+
+<details>
+<summary>List buses</summary>
+
+```shell
+# i2cdetect -l
+i2c-1	i2c       	OMAP I2C adapter                	I2C adapter
+i2c-2	i2c       	OMAP I2C adapter                	I2C adapter
+i2c-0	i2c       	OMAP I2C adapter                	I2C adapter
+```
+
+</details>
+
+<details>
+<summary>Test i2c capabilities</summary>
+
+```shell
+# i2cdetect -F 1
+Functionalities implemented by /dev/i2c-1:
+I2C                              yes
+SMBus Quick Command              no
+SMBus Send Byte                  yes
+SMBus Receive Byte               yes
+SMBus Write Byte                 yes
+SMBus Read Byte                  yes
+SMBus Write Word                 yes
+SMBus Read Word                  yes
+SMBus Process Call               yes
+SMBus Block Write                yes
+SMBus Block Read                 no
+SMBus Block Process Call         no
+SMBus PEC                        yes
+I2C Block Write                  yes
+I2C Block Read                   yes
+```
+
+</details>
+
+<details>
+<summary>Test regular detection - does not work ("Quick Write" not supposed)</summary>
+
+```shell
+# i2cdetect -y 1
+Error: Can't use SMBus Quick Write command on this bus                      
+```
+
+</details>
+
+<details>
+<summary>Test "quick write" detection - does not work ("Quick Write" not supposed)</summary>
+
+```shell
+# i2cdetect -y -q 1
+Error: Can't use SMBus Quick Write command on this bus
+```
+
+</details>
+
+<details>
+<summary>Test "receive byte" detection - does not work (sensor not detected)</summary>
+
+```shell
+# i2cdetect -y -r 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --                                                              
+```
 
 </details>
 
