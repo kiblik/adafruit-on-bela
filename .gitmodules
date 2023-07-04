@@ -1,0 +1,9 @@
+[submodule "Adafruit_MLX90393_Library"]
+	path = Adafruit_MLX90393_Library
+	url = git@github.com:kiblik/Adafruit_MLX90393_Library.git
+[submodule "Adafruit_BusIO"]
+	path = Adafruit_BusIO
+	url = git@github.com:kiblik/Adafruit_BusIO.git
+[submodule "Adafruit_Sensor"]
+	path = Adafruit_Sensor
+	url = git@github.com:kiblik/Adafruit_Sensor.git
