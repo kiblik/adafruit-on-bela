@@ -1,13 +1,19 @@
 This document is trying to summarise steps performed to create working implementation.
 
+# Facts
+
+**Used sensor:** MLX90393
+**Address of sensor:** 0x0c ()
+
+
 # Prechecks
 
-## Goal: Sensor is working with oficial library
+## Goal: Sensor is working with the official library
 
 ### Description
 
 We wanted to test if our sensor is not broken and it is returning data as expected.
-For tests, we used [MLX90393](https://www.adafruit.com/product/4022) with oficial libraries:
+For tests, we used [MLX90393](https://www.adafruit.com/product/4022) with the official libraries:
 - [Adafruit MLX90393](https://github.com/adafruit/Adafruit_MLX90393_Library) version `2.0.4`
   - [Adafruit BusIO](https://github.com/adafruit/Adafruit_BusIO) version `1.14.2`
   - [Adafruit Unified Sensor](https://github.com/adafruit/Adafruit_Sensor) version `1.1.10`
@@ -38,3 +44,106 @@ X: -9.01 	Y: -12.02 	Z: 37.51 uTesla
 </details>
 
 **Result:** Sensor works
+
+## Goal: Sensor communicate with Linux-based system over I2C
+
+For test we choose RaspPI. 
+
+<details>
+<summary>Setup</summary>
+
+![RaspPI connected to MLX90393 via I2C](./pics/raspPi.jpg)
+
+</details>
+
+<details>
+<summary>List buses</summary>
+
+```shell
+$ i2cdetect -l
+i2c-1	i2c       	bcm2835 (i2c@7e804000)          	I2C adapter
+i2c-2	i2c       	bcm2835 (i2c@7e805000)          	I2C adapter
+```
+
+</details>
+
+<details>
+<summary>Test i2c capabilities</summary>
+
+```shell
+$ i2cdetect -F 1
+Functionalities implemented by /dev/i2c-1:
+I2C                              yes
+SMBus Quick Command              yes
+SMBus Send Byte                  yes
+SMBus Receive Byte               yes
+SMBus Write Byte                 yes
+SMBus Read Byte                  yes
+SMBus Write Word                 yes
+SMBus Read Word                  yes
+SMBus Process Call               yes
+SMBus Block Write                yes
+SMBus Block Read                 no
+SMBus Block Process Call         no
+SMBus PEC                        yesd
+I2C Block Write                  yes
+I2C Block Read                   yes
+```
+
+</details>
+
+_Note:_ RaspPI supports "SMBus Quick Command" on the used bus. But it is not supported on Bela. It might be the reason of non-working communication.
+
+<details>
+<summary>Test regular detection - works</summary>
+
+```shell
+$ i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- 0c -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                         
+```
+
+</details>
+
+<details>
+<summary>Test "quick write" detection - works</summary>
+
+```shell
+$ i2cdetect -y -q 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- 0c -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                                               
+```
+
+</details>
+
+<details>
+<summary>Test "receive byte" detection - does not work</summary>
+
+```shell
+$ i2cdetect -y -r 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                                                                
+```
+
+</details>
