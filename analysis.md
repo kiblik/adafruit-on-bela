@@ -11,6 +11,7 @@ This document is trying to summarise steps performed to create working implement
 
 <details>
 <summary>Description</summary>
+
 We wanted to test if our sensor is not broken and it is returning data as expected.
 For tests, we used [MLX90393](https://www.adafruit.com/product/4022) with the official libraries:
 - [Adafruit MLX90393](https://github.com/adafruit/Adafruit_MLX90393_Library) version `2.0.4`
