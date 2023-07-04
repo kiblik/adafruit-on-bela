@@ -17,11 +17,14 @@ Provided example [basicdemo.ino](https://github.com/adafruit/Adafruit_MLX90393_L
 
 <details>
 <summary>Setup</summary>
-![Arduino connected to MLX90393 via I2C](pics/arduino.jpg)
+
+![Arduino connected to MLX90393 via I2C](./pics/arduino.jpg)
+
 </details>
 
 <details>
 <summary>Example output</summary>
+
 ```
 Starting Adafruit MLX90393 Demo
 Found a MLX90393 sensor
@@ -31,6 +34,7 @@ Y: -12.0160 uT
 Z: 37.5100 uT
 X: -9.01 	Y: -12.02 	Z: 37.51 uTesla 
 ```
+
 </details>
 
 **Result:** Sensor works
