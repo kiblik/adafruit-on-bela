@@ -48,10 +48,10 @@ X: -9.01 	Y: -12.02 	Z: 37.51 uTesla
 
 ## Goal: Sensor communicate with Linux-based system over I2C
 
-For test we choose RaspPI. 
-
 <details>
 <summary>Setup</summary>
+
+For test we choose RaspPI
 
 ![RaspPI connected to MLX90393 via I2C](./pics/raspPi.jpg)
 
