@@ -152,9 +152,8 @@ $ i2cdetect -y -r 1
 <details>
 <summary>Test basic functionality - works</summary>
 
-These lines are trying to run 2 fist commands performed by official library.
-
-https://github.com/adafruit/Adafruit_MLX90393_Library/blob/2ac6883873a69d45c45d4371c26a4fc7a81d7777/Adafruit_MLX90393.cpp#L72-L78
+These lines are trying to run [2 first commands performed by official library](https://github.com/adafruit/Adafruit_MLX90393_Library/blob/2ac6883873a69d45c45d4371c26a4fc7a81d7777/Adafruit_MLX90393.cpp#L72-L78
+).
 
 - Controler: `0x80` => `MLX90393_REG_EX` (enter ExitMode)
 - Sensor: `0x01` => `0x01 >> 2 == MLX90393_STATUS_OK`
