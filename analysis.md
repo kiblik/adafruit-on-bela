@@ -311,3 +311,58 @@ Bela platform does not have `i2ctransfer` so we are going to simulate same scena
 ```
 
 </details>
+
+
+<details>
+<summary>Basic test if official Bela `I2c.h` - works</summary>
+
+Same sequence, same result
+
+```cpp
+#include <Bela.h>
+#include <I2c.h>
+
+bool setup(BelaContext *context, void *userData)
+{
+	I2c i2cBus;
+	uint8_t txBuffer[1], rxBuffer[1];
+	ssize_t w, r;
+
+	i2cBus.initI2C_RW(1, 0x0c, 0);
+	
+	txBuffer[0] = 0x80;
+	w = i2cBus.writeBytes(txBuffer, 1);
+	r = i2cBus.readBytes(rxBuffer, 1);
+	rt_printf("WriteStatus: 0x%x, ReadStatus: 0x%x, Data: 0x%x\n", w, r, rxBuffer[0]);
+	
+	txBuffer[0] = 0xF0;
+	w = i2cBus.writeBytes(txBuffer, 1);
+	r = i2cBus.readBytes(rxBuffer, 1);
+	rt_printf("WriteStatus: 0x%x, ReadStatus: 0x%x, Data: 0x%x\n", w, r, rxBuffer[0]);
+
+	i2cBus.closeI2C();
+	
+	return true;
+}
+
+void render(BelaContext *context, void *userData)
+{
+
+}
+
+void cleanup(BelaContext *context, void *userData)
+{
+
+}
+```
+
+Output:
+
+```
+WriteStatus: 0x1, ReadStatus: 0x1, Data: 0x2
+WriteStatus: 0x1, ReadStatus: 0x1, Data: 0x6
+```
+
+</details>
+
+
