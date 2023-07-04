@@ -9,8 +9,8 @@ This document is trying to summarise steps performed to create working implement
 
 ## Goal: Sensor is working with the official library
 
-### Description
-
+<details>
+<summary>Description</summary>
 We wanted to test if our sensor is not broken and it is returning data as expected.
 For tests, we used [MLX90393](https://www.adafruit.com/product/4022) with the official libraries:
 - [Adafruit MLX90393](https://github.com/adafruit/Adafruit_MLX90393_Library) version `2.0.4`
@@ -19,6 +19,8 @@ For tests, we used [MLX90393](https://www.adafruit.com/product/4022) with the of
   - Lib [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306) was download by Arduino IDE as well but is was not used during testing (lib is necessary only if you use display for testing; we used only serial port for debug messages)
 
 Provided example [basicdemo.ino](https://github.com/adafruit/Adafruit_MLX90393_Library/blob/master/examples/basicdemo/basicdemo.ino) was used for testing.
+
+</details>
 
 <details>
 <summary>Setup</summary>
@@ -89,9 +91,9 @@ I2C Block Write                  yes
 I2C Block Read                   yes
 ```
 
-</details>
-
 _Note:_ RaspPI supports "SMBus Quick Command" on the used bus. But it is not supported on Bela. It might be the reason of non-working communication.
+
+</details>
 
 <details>
 <summary>Test regular detection - works</summary>
