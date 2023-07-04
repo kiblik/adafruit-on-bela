@@ -192,6 +192,8 @@ $ i2cget -y 1 0x0c
 
 </details>
 
+**Result:** Communication with sensor is possible
+
 # Implementation for Bela plaform
 
 <details>
