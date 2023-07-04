@@ -3,10 +3,9 @@ This document is trying to summarise steps performed to create working implement
 # Facts
 
 **Used sensor:** MLX90393
-**Address of sensor:** 0x0c ()
+**Address of sensor:** 0x0c
 
-
-# Prechecks
+# Pre-checks
 
 ## Goal: Sensor is working with the official library
 
@@ -150,10 +149,9 @@ $ i2cdetect -y -r 1
 
 
 <details>
-<summary>Test basic functionality - works</summary>
+<summary>Test basic functionality (i2ctransfer) - works</summary>
 
-These lines are trying to run [first 2 commands performed by official library](https://github.com/adafruit/Adafruit_MLX90393_Library/blob/2ac6883873a69d45c45d4371c26a4fc7a81d7777/Adafruit_MLX90393.cpp#L72-L78
-).
+These lines are trying to run [first 2 commands performed by official library](https://github.com/adafruit/Adafruit_MLX90393_Library/blob/2ac6883873a69d45c45d4371c26a4fc7a81d7777/Adafruit_MLX90393.cpp#L72-L78).
 
 - Controler: `0x80` => `MLX90393_REG_EX` (enter ExitMode)
 - Sensor: `0x01` => `0x01 >> 2 == MLX90393_STATUS_OK`
@@ -167,6 +165,57 @@ msg 1: addr 0x0c, read, len 1, buf 0x01
 $ i2ctransfer -v -y 1 w1@0x0c 0xF0 r1@0x0c
 msg 0: addr 0x0c, write, len 1, buf 0xf0
 msg 1: addr 0x0c, read, len 1, buf 0x05
+```
+
+</details>
+
+<details>
+<summary>Test basic functionality (i2cget, i2cset) - works</summary>
+
+Bela platform does not have `i2ctransfer` so we are going to simulate same scenario with `i2cget` and  `i2cset`
+
+- Controler: `0x80` => `MLX90393_REG_EX` (enter ExitMode)
+- Sensor: `0x02` => `0x02 >> 2 == MLX90393_STATUS_OK`
+- Controler: `0xF0` => `MLX90393_REG_RT` (soft reset)
+- Sensor: `0x06` => `0x06 >> 2 == MLX90393_STATUS_RESET` (just restarted)
+
+```shell
+$ i2cset -y 1 0x0c 0x80
+$ i2cget -y 1 0x0c
+0x02
+$ i2cset -y 1 0x0c 0xF0
+$ i2cget -y 1 0x0c
+0x06
+```
+
+</details>
+
+# Implementation for Bela plaform
+
+<details>
+<summary>Setup</summary>
+
+![Bela connected to MLX90393 via I2C](./pics/bela.jpg)
+
+</details>
+
+<details>
+<summary>Test basic functionality (i2cget, i2cset) - works</summary>
+
+Bela platform does not have `i2ctransfer` so we are going to simulate same scenario with `i2cget` and  `i2cset`
+
+- Controler: `0x80` => `MLX90393_REG_EX` (enter ExitMode)
+- Sensor: `0x02` => `0x02 >> 2 == MLX90393_STATUS_OK`
+- Controler: `0xF0` => `MLX90393_REG_RT` (soft reset)
+- Sensor: `0x06` => `0x06 >> 2 == MLX90393_STATUS_RESET` (just restarted)
+
+```shell
+# i2cset -y 1 0x0c 0x80
+# i2cget -y 1 0x0c
+0x02
+# i2cset -y 1 0x0c 0xF0
+# i2cget -y 1 0x0c
+0x06
 ```
 
 </details>
