@@ -786,6 +786,19 @@ Found a MLX90393 sensor
 
 We adopted the official approach to wiringBone lib https://github.com/kiblik/wiringBone/commit/adc2a652afb49ffd54bdf87de5ac66207c73ca2b
 
-And it works
+And it works: 
+
+```
+Getting ready
+Gain set to: 2.5 x
+X: -24.032000 uT
+Y: -33.043999 uT
+Z: -21.175001 uT
+X: -24.032000 	Y: -33.043999 	Z: -21.780001 uTesla
+X: -24.032000 uT
+Y: -33.043999 uT
+Z: -21.175001 uT
+X: -24.032000 	Y: -33.043999 	Z: -22.385000 uTesla
+```
 
 </details>
