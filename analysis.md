@@ -97,7 +97,7 @@ _Note:_ RaspPI supports "SMBus Quick Command" on the used bus. But it is not sup
 </details>
 
 <details>
-<summary>Test regular detection - works</summary>
+<summary>Test regular detection - works ✅</summary>
 
 ```shell
 $ i2cdetect -y 1
@@ -115,7 +115,7 @@ $ i2cdetect -y 1
 </details>
 
 <details>
-<summary>Test "quick write" detection - works</summary>
+<summary>Test "quick write" detection - works ✅</summary>
 
 ```shell
 $ i2cdetect -y -q 1
@@ -133,7 +133,7 @@ $ i2cdetect -y -q 1
 </details>
 
 <details>
-<summary>Test "receive byte" detection - does not work (sensor not detected)</summary>
+<summary>Test "receive byte" detection - does not work (sensor not detected) ❌</summary>
 
 ```shell
 $ i2cdetect -y -r 1
@@ -152,7 +152,7 @@ $ i2cdetect -y -r 1
 
 
 <details>
-<summary>Test basic functionality (i2ctransfer) - works</summary>
+<summary>Test basic functionality (i2ctransfer) - works ✅</summary>
 
 These lines are trying to run [first 2 commands performed by official library](https://github.com/adafruit/Adafruit_MLX90393_Library/blob/2ac6883873a69d45c45d4371c26a4fc7a81d7777/Adafruit_MLX90393.cpp#L72-L78).
 
@@ -173,7 +173,7 @@ msg 1: addr 0x0c, read, len 1, buf 0x05
 </details>
 
 <details>
-<summary>Test basic functionality (i2cget, i2cset) - works</summary>
+<summary>Test basic functionality (i2cget, i2cset) - works ✅</summary>
 
 Bela platform does not have `i2ctransfer` so we are going to simulate same scenario with `i2cget` and  `i2cset`
 
@@ -243,7 +243,7 @@ I2C Block Read                   yes
 </details>
 
 <details>
-<summary>Test regular detection - does not work ("Quick Write" not supposed)</summary>
+<summary>Test regular detection - does not work ("Quick Write" not supposed) ❌</summary>
 
 ```shell
 # i2cdetect -y 1
@@ -253,7 +253,7 @@ Error: Can't use SMBus Quick Write command on this bus
 </details>
 
 <details>
-<summary>Test "quick write" detection - does not work ("Quick Write" not supposed)</summary>
+<summary>Test "quick write" detection - does not work ("Quick Write" not supposed) ❌</summary>
 
 ```shell
 # i2cdetect -y -q 1
@@ -263,7 +263,7 @@ Error: Can't use SMBus Quick Write command on this bus
 </details>
 
 <details>
-<summary>Test "receive byte" detection - does not work (sensor not detected)</summary>
+<summary>Test "receive byte" detection - does not work (sensor not detected) ❌</summary>
 
 ```shell
 # i2cdetect -y -r 1
@@ -282,7 +282,7 @@ Error: Can't use SMBus Quick Write command on this bus
 
 
 <details>
-<summary>Test basic functionality (i2ctransfer) - does not work (command not found)</summary>
+<summary>Test basic functionality (i2ctransfer) - does not work (command not found) ❌</summary>
 
 ```shell
 # i2ctransfer
@@ -292,7 +292,7 @@ Error: Can't use SMBus Quick Write command on this bus
 </details>
 
 <details>
-<summary>Test basic functionality (i2cget, i2cset) - works</summary>
+<summary>Test basic functionality (i2cget, i2cset) - works ✅</summary>
 
 Bela platform does not have `i2ctransfer` so we are going to simulate same scenario with `i2cget` and `i2cset`
 
@@ -314,7 +314,7 @@ Bela platform does not have `i2ctransfer` so we are going to simulate same scena
 
 
 <details>
-<summary>Basic test with official Bela `I2c.h` - works</summary>
+<summary>Basic test with official Bela `I2c.h` - works ✅</summary>
 
 Same sequence, same result
 
